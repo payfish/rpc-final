@@ -3,7 +3,6 @@ package com.fu1sh.rpc.proxy;
 import com.fu1sh.rpc.client.SocketClient;
 import com.fu1sh.rpc.entity.RpcRequest;
 import com.fu1sh.rpc.entity.RpcResponse;
-import com.fu1sh.rpc.test.TestSocketClient;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

@@ -1,3 +1,39 @@
 [INFO][24-06-30][com.fu1sh.rpc.server.SocketServer]服务启动中
 [INFO][24-06-30][com.fu1sh.rpc.server.SocketServer]Accepted connection from /127.0.0.1:61005
 [INFO][24-06-30][com.fu1sh.rpc.api.Dog]接受到投喂的狗粮
+[INFO][24-07-01][com.fu1sh.rpc.register.DefaultServiceRegistry]向接口: [interface com.fu1sh.rpc.api.Animal] 注册服务: com.fu1sh.rpc.api.Dog
+[INFO][24-07-01][com.fu1sh.rpc.server.SocketServer]服务启动中
+[INFO][24-07-01][com.fu1sh.rpc.server.SocketServer]Accepted connection from /127.0.0.1:52074
+[INFO][24-07-01][com.fu1sh.rpc.api.Dog]接受到投喂的狗粮
+[INFO][24-07-01][com.fu1sh.rpc.server.RequestHandler]服务调用方法成功！
+[INFO][24-07-01][com.fu1sh.rpc.register.DefaultServiceRegistry]向接口: [interface com.fu1sh.rpc.api.Animal] 注册服务: com.fu1sh.rpc.api.Dog
+[INFO][24-07-01][com.fu1sh.rpc.server.SocketServer]服务启动中
+[INFO][24-07-01][com.fu1sh.rpc.server.SocketServer]Accepted connection from /127.0.0.1:52098
+[INFO][24-07-01][com.fu1sh.rpc.api.Dog]接受到投喂的狗粮
+[INFO][24-07-01][com.fu1sh.rpc.server.RequestHandler]服务调用方法成功！
+[INFO][24-07-01][com.fu1sh.rpc.register.DefaultServiceRegistry]向接口: [interface com.fu1sh.rpc.api.Animal] 注册服务: com.fu1sh.rpc.api.Dog
+[INFO][24-07-01][com.fu1sh.rpc.server.SocketServer]服务启动中
+[INFO][24-07-01][com.fu1sh.rpc.server.SocketServer]Accepted connection from /127.0.0.1:62405
+[INFO][24-07-01][com.fu1sh.rpc.api.Dog]接受到投喂的狗粮
+[INFO][24-07-01][com.fu1sh.rpc.server.RequestHandler]服务调用方法成功！
+[INFO][24-07-01][com.fu1sh.rpc.register.DefaultServiceRegistry]向接口: [interface com.fu1sh.rpc.api.Animal] 注册服务: com.fu1sh.rpc.api.Dog
+[INFO][24-07-01][com.fu1sh.rpc.register.DefaultServiceRegistry]向接口: [interface com.fu1sh.rpc.api.Animal] 注册服务: com.fu1sh.rpc.api.Pig
+[INFO][24-07-01][com.fu1sh.rpc.server.SocketServer]服务启动中
+[INFO][24-07-01][com.fu1sh.rpc.server.SocketServer]Accepted connection from /127.0.0.1:51427
+[INFO][24-07-01][com.fu1sh.rpc.server.RequestHandler]服务调用方法成功！
+[INFO][24-07-01][com.fu1sh.rpc.server.SocketServer]Accepted connection from /127.0.0.1:51428
+[INFO][24-07-01][com.fu1sh.rpc.server.RequestHandler]服务调用方法成功！
+[INFO][24-07-01][com.fu1sh.rpc.register.DefaultServiceRegistry]向接口: [interface com.fu1sh.rpc.api.Animal] 注册服务: com.fu1sh.rpc.api.Dog
+[INFO][24-07-01][com.fu1sh.rpc.register.DefaultServiceRegistry]向接口: [interface com.fu1sh.rpc.api.Human] 注册服务: com.fu1sh.rpc.api.Man
+[INFO][24-07-01][com.fu1sh.rpc.server.SocketServer]服务启动中
+[INFO][24-07-01][com.fu1sh.rpc.server.SocketServer]Accepted connection from /127.0.0.1:62866
+[INFO][24-07-01][com.fu1sh.rpc.server.SocketServer]Accepted connection from /127.0.0.1:62870
+[INFO][24-07-01][com.fu1sh.rpc.server.RequestHandler]服务调用方法成功！
+[INFO][24-07-01][com.fu1sh.rpc.server.SocketServer]Accepted connection from /127.0.0.1:62871
+[INFO][24-07-01][com.fu1sh.rpc.api.Dog]接受到投喂的狗粮
+[INFO][24-07-01][com.fu1sh.rpc.server.RequestHandler]服务调用方法成功！
+[INFO][24-07-01][com.fu1sh.rpc.server.SocketServer]Accepted connection from /127.0.0.1:62881
+[INFO][24-07-01][com.fu1sh.rpc.server.RequestHandler]服务调用方法成功！
+[INFO][24-07-01][com.fu1sh.rpc.server.SocketServer]Accepted connection from /127.0.0.1:62882
+[INFO][24-07-01][com.fu1sh.rpc.api.Dog]接受到投喂的狗粮
+[INFO][24-07-01][com.fu1sh.rpc.server.RequestHandler]服务调用方法成功！
