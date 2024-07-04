@@ -7,9 +7,19 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class SocketClient {
+public class SocketClient implements RpcClient{
 
-    public Object sendRequest(RpcRequest request, String host, int port) {
+    private String host;
+    private int port;
+
+    public SocketClient(String host, int port) {
+        this.host = host;
+        this.port = port;
+    }
+
+
+    @Override
+    public Object sendRequest(RpcRequest request) {
         try (Socket socket = new Socket(host, port)) {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());

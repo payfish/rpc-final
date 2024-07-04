@@ -1,4 +1,4 @@
-package com.fu1sh.rpc.server;
+package com.fu1sh.rpc.handler;
 
 import com.fu1sh.rpc.entity.RpcRequest;
 import com.fu1sh.rpc.entity.RpcResponse;

@@ -9,6 +9,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Food implements Serializable {
 
+    public Food() {}
+
     private String name;
     private int price;
 }

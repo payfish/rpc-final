@@ -1,7 +1,7 @@
 package com.fu1sh.rpc.register;
 
 
-import com.fu1sh.rpc.error.RpcError;
+import com.fu1sh.rpc.enumeration.RpcError;
 import com.fu1sh.rpc.exception.RpcException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

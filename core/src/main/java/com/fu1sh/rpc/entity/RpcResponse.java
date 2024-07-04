@@ -6,9 +6,11 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-@Builder
+
 @Data
 public class RpcResponse<T> implements Serializable {
+
+    public RpcResponse() {}
 
     //响应状态码
     private Integer code;
@@ -18,15 +20,16 @@ public class RpcResponse<T> implements Serializable {
     private T data;
 
     public static <T> RpcResponse<T> success(T data) {
-        return new RpcResponseBuilder<T>()
-                .code(RpcResponseCodeAndMsg.SUCCESS.getCode())
-                .msg(RpcResponseCodeAndMsg.SUCCESS.getMsg())
-                .data(data).build();
+        RpcResponse<T> response = new RpcResponse<>();
+        response.setCode(RpcResponseCodeAndMsg.SUCCESS.getCode());
+        response.setData(data);
+        return response;
     }
 
     public static <T> RpcResponse<T> fail(RpcResponseCodeAndMsg codeAndMsg) {
-        return new RpcResponseBuilder<T>()
-                .code(codeAndMsg.getCode())
-                .msg(codeAndMsg.getMsg()).build();
+        RpcResponse<T> response = new RpcResponse<>();
+        response.setCode(codeAndMsg.getCode());
+        response.setMsg(codeAndMsg.getMsg());
+        return response;
     }
 }

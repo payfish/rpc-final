@@ -1,6 +1,6 @@
 package com.fu1sh.rpc.exception;
 
-import com.fu1sh.rpc.error.RpcError;
+import com.fu1sh.rpc.enumeration.RpcError;
 
 public class RpcException extends RuntimeException {
 

@@ -10,7 +10,7 @@ import com.fu1sh.rpc.proxy.RpcClientProxy;
 public class TestSocketClient {
 
     public static void main(String[] args) {
-        RpcClientProxy rpcClientProxy = new RpcClientProxy("127.0.0.1", 9999);
+        RpcClientProxy rpcClientProxy = new RpcClientProxy(new SocketClient("127.0.0.1", 9999));
         Animal animalService = rpcClientProxy.getProxy(Animal.class);
         Human humanService = rpcClientProxy.getProxy(Human.class);
         Food food = new Food("狗粮", 20);
