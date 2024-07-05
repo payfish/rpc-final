@@ -11,6 +11,8 @@ public class TestNettyClient {
         Animal animalService = rpcClientProxy.getProxy(Animal.class);
         Food food = new Food("猪食", 30);
         String s = animalService.eat(food);
+        String s1 = animalService.greet("fuish", "hello!");
         System.out.println(s);
+        System.out.println(s1);
     }
 }

@@ -41,6 +41,12 @@ public class JsonSerializer implements CommonSerializer{
         }
     }
 
+    /**
+     * 解决反序列化RpcRequest的Object[] params数组中的元素前后不一致的问题
+     * @param obj
+     * @return
+     * @throws IOException
+     */
     private Object handleRequest(Object obj) throws IOException {
         RpcRequest rpcRequest = (RpcRequest) obj;
         for(int i = 0; i < rpcRequest.getParamTypes().length; i ++) {

@@ -8,7 +8,7 @@ import lombok.Getter;
 public enum SerializerCode {
 
     JSON_SERIALIZER(1),
-    KRYO_SERIALIZER(2);
+    KRYO_SERIALIZER(0);
 
     private final int code;
 }

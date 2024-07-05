@@ -19,7 +19,7 @@ public class CommonEncoder extends MessageToByteEncoder {
 
     //自定义协议：魔数（int）4字节|数据包类型|序列化器类型|消息长度|消息体
     @Override
-    protected void encode(ChannelHandlerContext ctx, Object o, ByteBuf byteBuf) throws Exception {
+    protected void encode(ChannelHandlerContext ctx, Object o, ByteBuf byteBuf) {
         byteBuf.writeInt(MAGIC_NUMBER);
         if (o instanceof RpcRequest) {
             byteBuf.writeInt(PackageType.REQUEST_PACK.getCode());

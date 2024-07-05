@@ -11,4 +11,9 @@ public class Dog implements Animal {
         logger.info("接受到投喂的{}", food.getName());
         return food.getName() + "的价格为: " + food.getPrice();
     }
+
+    @Override
+    public String greet(String name, String msg) {
+        return name + " " + msg;
+    }
 }
