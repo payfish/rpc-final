@@ -1,6 +1,10 @@
 package com.fu1sh.rpc.handler;
 
 import com.fu1sh.rpc.entity.RpcRequest;
+import com.fu1sh.rpc.entity.RpcResponse;
+import com.fu1sh.rpc.register.DefaultServiceProvider;
+import com.fu1sh.rpc.register.ServiceProvider;
+import com.fu1sh.rpc.util.RpcResponseCodeAndMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,8 +15,15 @@ public class RequestHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(RequestHandler.class);
 
-    public Object handle(Object service, RpcRequest rpcRequest) {
+    private static final ServiceProvider serviceProvider;
+
+    static {
+        serviceProvider = new DefaultServiceProvider();
+    }
+
+    public Object handle(RpcRequest rpcRequest) {
         Object result = null;
+        Object service = serviceProvider.getService(rpcRequest.getInterfaceName());
         try {
             result = invokeTargetMethod(service, rpcRequest);
             logger.info("服务调用方法成功！");
@@ -27,7 +38,7 @@ public class RequestHandler {
         try {
             method = service.getClass().getDeclaredMethod(rpcRequest.getMethodName(), rpcRequest.getParamTypes());
         } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
+            return RpcResponse.fail(RpcResponseCodeAndMsg.METHOD_NOT_FOUND);
         }
         return method.invoke(service, rpcRequest.getParams());
     }

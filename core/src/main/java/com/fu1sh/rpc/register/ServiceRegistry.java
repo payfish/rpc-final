@@ -1,8 +1,10 @@
 package com.fu1sh.rpc.register;
 
+import java.net.InetSocketAddress;
+
 public interface ServiceRegistry {
 
-    <T> void register(T service);
+    void register(String serviceName, InetSocketAddress address);
 
-    Object getService(String serviceName);
+    InetSocketAddress lookupService(String serviceName);
 }

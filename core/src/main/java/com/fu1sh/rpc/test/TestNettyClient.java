@@ -3,16 +3,20 @@ package com.fu1sh.rpc.test;
 import com.fu1sh.rpc.api.Animal;
 import com.fu1sh.rpc.api.Food;
 import com.fu1sh.rpc.client.NettyClient;
+import com.fu1sh.rpc.client.RpcClient;
 import com.fu1sh.rpc.proxy.RpcClientProxy;
+import com.fu1sh.rpc.serializer.KryoSerializer;
 
 public class TestNettyClient {
     public static void main(String[] args) {
-        RpcClientProxy rpcClientProxy = new RpcClientProxy(new NettyClient("127.0.0.1", 9999));
+        RpcClient client = new NettyClient();
+        client.setSerializer(new KryoSerializer());
+        RpcClientProxy rpcClientProxy = new RpcClientProxy(client);
         Animal animalService = rpcClientProxy.getProxy(Animal.class);
         Food food = new Food("猪食", 30);
         String s = animalService.eat(food);
-        String s1 = animalService.greet("fuish", "hello!");
+//        String s1 = animalService.greet("fuish", "hello!");
         System.out.println(s);
-        System.out.println(s1);
+//        System.out.println(s1);
     }
 }

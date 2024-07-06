@@ -1,6 +1,7 @@
 package com.fu1sh.rpc.client;
 
 import com.fu1sh.rpc.entity.RpcRequest;
+import com.fu1sh.rpc.serializer.CommonSerializer;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -29,5 +30,10 @@ public class SocketClient implements RpcClient{
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void setSerializer(CommonSerializer serializer) {
+
     }
 }

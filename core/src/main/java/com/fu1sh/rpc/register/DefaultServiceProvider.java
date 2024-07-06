@@ -10,9 +10,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class DefaultServiceRegistry implements ServiceRegistry{
+public class DefaultServiceProvider implements ServiceProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(DefaultServiceRegistry.class);
+    private static final Logger logger = LoggerFactory.getLogger(DefaultServiceProvider.class);
 
     private static final Map<String, Object> servicesMap = new ConcurrentHashMap<>();
     private static final Set<String> registeredServices = ConcurrentHashMap.newKeySet();

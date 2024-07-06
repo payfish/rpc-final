@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum RpcResponseCodeAndMsg {
 
     SUCCESS(200, "方法调用成功！"),
+    METHOD_NOT_FOUND(300, "未找到方法！"),
     FAIL(404, "调用方法失败！");
 
     private final int code;

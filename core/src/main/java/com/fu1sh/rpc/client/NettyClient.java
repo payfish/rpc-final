@@ -1,75 +1,64 @@
 package com.fu1sh.rpc.client;
 
-import com.fu1sh.rpc.codec.CommonDecoder;
-import com.fu1sh.rpc.codec.CommonEncoder;
 import com.fu1sh.rpc.entity.RpcRequest;
 import com.fu1sh.rpc.entity.RpcResponse;
-import com.fu1sh.rpc.handler.NettyClientHandler;
+import com.fu1sh.rpc.enumeration.RpcError;
+import com.fu1sh.rpc.exception.RpcException;
+import com.fu1sh.rpc.register.NacosServiceRegistry;
+import com.fu1sh.rpc.register.ServiceRegistry;
 import com.fu1sh.rpc.serializer.CommonSerializer;
-import com.fu1sh.rpc.serializer.JsonSerializer;
-import com.fu1sh.rpc.serializer.KryoSerializer;
-import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.InetSocketAddress;
+import java.util.concurrent.atomic.AtomicReference;
+
 public class NettyClient implements RpcClient{
 
     private static final Logger logger = LoggerFactory.getLogger(NettyClient.class);
+    private final ServiceRegistry serviceRegistry;
+    private CommonSerializer serializer;
 
-    private String host;
-    private int port;
-    private static final Bootstrap bootstrap;
-
-    public NettyClient(String host, int port) {
-        this.host = host;
-        this.port = port;
-    }
-
-    static { //在静态代码块中先配置好客户端
-        bootstrap = new Bootstrap();
-        bootstrap.group(new NioEventLoopGroup())
-        .channel(NioSocketChannel.class)
-
-        .handler(new ChannelInitializer<SocketChannel>() {
-            @Override
-            protected void initChannel(SocketChannel ch) throws Exception {
-                ch.pipeline().addLast(new CommonDecoder())
-                        .addLast(new CommonEncoder(new KryoSerializer()))
-                        .addLast(new NettyClientHandler());
-            }
-        });
+    public NettyClient() {
+        this.serviceRegistry = new NacosServiceRegistry();
     }
 
     @Override
     public Object sendRequest(RpcRequest request) {
+        if (serializer == null) {
+            logger.error("未设置序列化器");
+            throw new RpcException(RpcError.SERVICE_NOT_FOUND);
+        }
+        AtomicReference<Object> result = new AtomicReference<>(null);
         try {
-            ChannelFuture future = bootstrap.connect(host, port).sync();
-            logger.info("客户端连接到服务器：{}，{}", host, port);
-            Channel channel = future.channel();
+            InetSocketAddress inetSocketAddress = serviceRegistry.lookupService(request.getInterfaceName());
+            Channel channel = ChannelProvider.get(inetSocketAddress, serializer);
             if (channel.isActive()) {
                 channel.writeAndFlush(request).addListener(future1 -> {
                     if (future1.isSuccess()) {
-                        logger.info("客户端发送消息：{}", request.toString());
+                        logger.info("客户端发送消息：{}", request);
                     } else {
                         logger.error("发送消息时有错误发生，{}", future1.cause().getMessage());
                     }
                 });
+                //阻塞等待直到channel关闭，关闭后AttributeKey才被设置好
+                channel.closeFuture().sync();
+                AttributeKey<RpcResponse> attributeKey = AttributeKey.valueOf("RpcResponse");
+                RpcResponse rpcResponse = channel.attr(attributeKey).get();
+                result.set(rpcResponse.getData());
+            } else {
+                System.exit(0);
             }
-            //阻塞等待直到channel关闭
-            channel.closeFuture().sync();
-            AttributeKey<RpcResponse> attributeKey = AttributeKey.valueOf("RpcResponse");
-            RpcResponse rpcResponse = channel.attr(attributeKey).get();
-            return rpcResponse.getData();
         } catch (InterruptedException e) {
             logger.error("发送消息时有错误发生：", e);
         }
-        return null;
+        return result.get();
+    }
+
+    @Override
+    public void setSerializer(CommonSerializer serializer) {
+        this.serializer = serializer;
     }
 }
